@@ -1,3 +1,6 @@
+#include "mcc_generated_files/system/system.h"
+#include "mcc_fatfs/fatfs/ff.h"
+
 #include <xc.h>
 
 #include "canlib.h"
@@ -71,9 +74,6 @@ int main(void) {
         txb_heartbeat();
     }
 }
-
-// Remove line below once generate code with MCC
-#pragma config MVECEN = OFF
 
 static void __interrupt() interrupt_handler(void) {
     if (PIR5) {
