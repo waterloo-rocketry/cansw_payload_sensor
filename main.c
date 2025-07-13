@@ -2,6 +2,7 @@
 #include "mcc_fatfs/fatfs/ff.h"
 
 #include <xc.h>
+#include "platform.h"
 
 #include "canlib.h"
 #include "timer.h"
@@ -35,17 +36,10 @@ static void can_msg_handler(const can_msg_t *msg) {
 }
 
 int main(void) {
-    // SYSTEM_Initialize();
-
-    // Set up CAN TX
-    TRISC1 = 0;
-    RC1PPS = 0x33;
-
-    // Set up CAN RX
-    TRISC0 = 1;
-    ANSELC0 = 0;
-    CANRXPPS = 0b00010000;
-
+    SYSTEM_Initialize();
+    
+    INIT_PINS();
+    
     // Set up CAN module
     can_timing_t can_setup;
     // can_generate_timing_params(_XTAL_FREQ, &can_setup);
@@ -66,11 +60,15 @@ int main(void) {
         // CLRWDT();
 
         if ((millis() - last_status_millis) > STATUS_CHECK_PERIOD) {
+            last_status_millis = millis();
+            
             can_msg_t board_stat_msg;
             build_general_board_status_msg(PRIO_MEDIUM, millis(), 0, 0, &board_stat_msg);
             txb_enqueue(&board_stat_msg);
+            
+            TOGGLE_BLUE_LED();
         }
-
+        
         txb_heartbeat();
     }
 }

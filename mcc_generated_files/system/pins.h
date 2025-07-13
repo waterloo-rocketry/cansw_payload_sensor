@@ -249,26 +249,25 @@
 #define IO_RC4_SetAnalogMode()      do { ANSELCbits.ANSELC4 = 1; } while(0)
 #define IO_RC4_SetDigitalMode()     do { ANSELCbits.ANSELC4 = 0; } while(0)
 
-// get/set RC6 aliases
-#define IO_RC6_TRIS                 TRISCbits.TRISC6
-#define IO_RC6_LAT                  LATCbits.LATC6
-#define IO_RC6_PORT                 PORTCbits.RC6
-#define IO_RC6_WPU                  WPUCbits.WPUC6
-#define IO_RC6_OD                   ODCONCbits.ODCC6
-#define IO_RC6_ANS                  ANSELCbits.ANSELC6
-#define IO_RC6_SetHigh()            do { LATCbits.LATC6 = 1; } while(0)
-#define IO_RC6_SetLow()             do { LATCbits.LATC6 = 0; } while(0)
-#define IO_RC6_Toggle()             do { LATCbits.LATC6 = ~LATCbits.LATC6; } while(0)
-#define IO_RC6_GetValue()           PORTCbits.RC6
-#define IO_RC6_SetDigitalInput()    do { TRISCbits.TRISC6 = 1; } while(0)
-#define IO_RC6_SetDigitalOutput()   do { TRISCbits.TRISC6 = 0; } while(0)
-#define IO_RC6_SetPullup()          do { WPUCbits.WPUC6 = 1; } while(0)
-#define IO_RC6_ResetPullup()        do { WPUCbits.WPUC6 = 0; } while(0)
-#define IO_RC6_SetPushPull()        do { ODCONCbits.ODCC6 = 0; } while(0)
-#define IO_RC6_SetOpenDrain()       do { ODCONCbits.ODCC6 = 1; } while(0)
-#define IO_RC6_SetAnalogMode()      do { ANSELCbits.ANSELC6 = 1; } while(0)
-#define IO_RC6_SetDigitalMode()     do { ANSELCbits.ANSELC6 = 0; } while(0)
-
+// get/set RC6/SDCard_CS aliases
+#define SDCard_CS_TRIS                 TRISCbits.TRISC6
+#define SDCard_CS_LAT                  LATCbits.LATC6
+#define SDCard_CS_PORT                 PORTCbits.RC6
+#define SDCard_CS_WPU                  WPUCbits.WPUC6
+#define SDCard_CS_OD                   ODCONCbits.ODCC6
+#define SDCard_CS_ANS                  ANSELCbits.ANSELC6
+#define SDCard_CS_SetHigh()            do { LATCbits.LATC6 = 1; } while(0)
+#define SDCard_CS_SetLow()             do { LATCbits.LATC6 = 0; } while(0)
+#define SDCard_CS_Toggle()             do { LATCbits.LATC6 = ~LATCbits.LATC6; } while(0)
+#define SDCard_CS_GetValue()           PORTCbits.RC6
+#define SDCard_CS_SetDigitalInput()    do { TRISCbits.TRISC6 = 1; } while(0)
+#define SDCard_CS_SetDigitalOutput()   do { TRISCbits.TRISC6 = 0; } while(0)
+#define SDCard_CS_SetPullup()          do { WPUCbits.WPUC6 = 1; } while(0)
+#define SDCard_CS_ResetPullup()        do { WPUCbits.WPUC6 = 0; } while(0)
+#define SDCard_CS_SetPushPull()        do { ODCONCbits.ODCC6 = 0; } while(0)
+#define SDCard_CS_SetOpenDrain()       do { ODCONCbits.ODCC6 = 1; } while(0)
+#define SDCard_CS_SetAnalogMode()      do { ANSELCbits.ANSELC6 = 1; } while(0)
+#define SDCard_CS_SetDigitalMode()     do { ANSELCbits.ANSELC6 = 0; } while(0)
 
 
 // get/set RC7 aliases
