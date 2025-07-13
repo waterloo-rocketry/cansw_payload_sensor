@@ -2,6 +2,8 @@
 #include "mcc_fatfs/fatfs/ff.h"
 
 #include <xc.h>
+#include <stdio.h>
+
 #include "platform.h"
 
 #include "canlib.h"
@@ -11,6 +13,17 @@
 
 // memory pool for the CAN tx buffer
 uint8_t tx_pool[400];
+
+// Set up files
+FATFS FatFs;
+FIL Fil;
+UINT bw;
+
+// File write buffer
+char file_write_buf[1500];
+uint16_t file_write_buf_ptr = 0;
+
+static char GLOBAL_FILENAME[20];
 
 static void can_msg_handler(const can_msg_t *msg) {
     if ((get_board_type_unique_id(msg) == BOARD_TYPE_UNIQUE_ID) &&
@@ -55,6 +68,42 @@ int main(void) {
     timer0_init();
 
     uint32_t last_status_millis = millis();
+    
+    uint16_t root_dir_files = 0;
+    FFDIR dir;
+    FILINFO finfo;
+    
+    while (f_mount(&FatFs, "", 1) != FR_OK) {
+        if (millis() - last_status_millis > STATUS_CHECK_PERIOD) {
+            last_status_millis = millis();
+            can_msg_t msg;
+            build_general_board_status_msg(PRIO_MEDIUM, millis(), ACT_STATE_ILLEGAL, 0, &msg);
+            txb_enqueue(&msg);
+            
+            TOGGLE_RED_LED();
+        }
+
+        txb_heartbeat();
+    }
+    SET_RED_LED(false);
+
+    // count the number of flies in the root directory of the SD card
+    if (f_opendir(&dir, "/") != FR_OK) {
+        // error(E_SD_FAIL_FS_INIT);
+    }
+
+    // set file info
+    while (f_readdir(&dir, &finfo) == FR_OK && finfo.fname[0] != '\0') {
+        root_dir_files++;
+    }
+    f_closedir(&dir);
+
+    sprintf(GLOBAL_FILENAME, "PAY_%04x.txt", root_dir_files);
+
+    if (f_open(&Fil, GLOBAL_FILENAME, FA_CREATE_NEW | FA_WRITE) == FR_OK) {
+        f_write(&Fil, "BEGIN PAYLOAD LOG\n", 18, &bw);
+        f_close(&Fil);
+    }
 
     for (;;) {
         // CLRWDT();
