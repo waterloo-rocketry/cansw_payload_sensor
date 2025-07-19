@@ -1,3 +1,4 @@
+#include "mcc_generated_files/mcc.h"
 #include <xc.h>
 
 #include "canlib.h"
@@ -31,10 +32,11 @@ static void can_msg_handler(const can_msg_t *msg) {
     }
 }
 
-int main(void) {
-    // SYSTEM_Initialize();
+void main(void)
+{
+    SYSTEM_Initialize();
 
-    // Set up CAN TX
+     // Set up CAN TX
     TRISC1 = 0;
     RC1PPS = 0x33;
 
@@ -71,9 +73,6 @@ int main(void) {
         txb_heartbeat();
     }
 }
-
-// Remove line below once generate code with MCC
-#pragma config MVECEN = OFF
 
 static void __interrupt() interrupt_handler(void) {
     if (PIR5) {
