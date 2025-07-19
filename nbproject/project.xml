@@ -13,6 +13,7 @@
                 <sourceRootElem>canlib/util</sourceRootElem>
                 <sourceRootElem>canlib/pic18f26k83</sourceRootElem>
                 <sourceRootElem>rocketlib/pic18f26k83</sourceRootElem>
+                <sourceRootElem>mcc_generated_files</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>
