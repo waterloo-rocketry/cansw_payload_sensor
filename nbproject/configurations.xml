@@ -4,6 +4,10 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <logicalFolder name="MCC Generated Files"
+                     displayName="MCC Generated Files"
+                     projectFiles="true">
+      </logicalFolder>
       <logicalFolder name="mcc_generated_files"
                      displayName="mcc_generated_files"
                      projectFiles="true">
@@ -36,6 +40,7 @@
                    displayName="Important Files"
                    projectFiles="true">
       <itemPath>Makefile</itemPath>
+      <itemPath>cansw_payload_sensor.mc3</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -57,6 +62,10 @@
         <itemPath>canlib/util/safe_ring_buffer.c</itemPath>
         <itemPath>canlib/util/timing_util.c</itemPath>
         <itemPath>canlib/pic18f26k83/pic18f26k83_can.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="MCC Generated Files"
+                     displayName="MCC Generated Files"
+                     projectFiles="true">
       </logicalFolder>
       <logicalFolder name="mcc_generated_files"
                      displayName="mcc_generated_files"
@@ -227,24 +236,6 @@
         <property key="coverage-enable" value=""/>
         <property key="stack-guidance" value="false"/>
       </XC8-CO>
-      <XC8-config-global>
-        <property key="advanced-elf" value="true"/>
-        <property key="constdata-progmem" value="false"/>
-        <property key="gcc-opt-driver-new" value="true"/>
-        <property key="gcc-opt-std" value="-std=c99"/>
-        <property key="gcc-output-file-format" value="dwarf-3"/>
-        <property key="mapped-progmem" value="false"/>
-        <property key="omit-pack-options" value="false"/>
-        <property key="omit-pack-options-new" value="1"/>
-        <property key="output-file-format" value="-mcof,+elf"/>
-        <property key="smart-io-format" value=""/>
-        <property key="stack-size-high" value="auto"/>
-        <property key="stack-size-low" value="auto"/>
-        <property key="stack-size-main" value="auto"/>
-        <property key="stack-type" value="compiled"/>
-        <property key="user-pack-device-support" value=""/>
-        <property key="wpo-lto" value="false"/>
-      </XC8-config-global>
     </conf>
   </confs>
 </configurationDescriptor>

@@ -47,11 +47,11 @@
 // Configuration bits: selected in the GUI
 
 // CONFIG1L
-#pragma config FEXTOSC = OFF    // External Oscillator Selection->Oscillator not enabled
-#pragma config RSTOSC = EXTOSC    // Reset Oscillator Selection->EXTOSC operating per FEXTOSC bits (device manufacturing default)
+#pragma config FEXTOSC = HS    // External Oscillator Selection->HS (crystal oscillator) above 8 MHz; PFM set to high power
+#pragma config RSTOSC = EXTOSC_4PLL    // Reset Oscillator Selection->EXTOSC with 4x PLL, with EXTOSC operating per FEXTOSC bits
 
 // CONFIG1H
-#pragma config CLKOUTEN = ON    // Clock out Enable bit->CLKOUT function is enabled
+#pragma config CLKOUTEN = OFF    // Clock out Enable bit->CLKOUT function is disabled
 #pragma config PR1WAY = ON    // PRLOCKED One-Way Set Enable bit->PRLOCK bit can be cleared and set only once
 #pragma config CSWEN = ON    // Clock Switch Enable bit->Writing to NOSC and NDIV is allowed
 #pragma config FCMEN = ON    // Fail-Safe Clock Monitor Enable bit->Fail-Safe Clock Monitor enabled
