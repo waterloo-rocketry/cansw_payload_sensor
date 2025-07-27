@@ -9,7 +9,7 @@
 #include "canlib.h"
 #include "timer.h"
 
-#define STATUS_CHECK_PERIOD 500
+#define STATUS_CHECK_PERIOD 1
 
 // memory pool for the CAN tx buffer
 uint8_t tx_pool[400];
@@ -67,17 +67,17 @@ int main(void) {
     // Set up timer 0 for millis
     timer0_init();
 
-    uint32_t last_status_millis = millis();
+    uint32_t last_status_millis = micros60();
     
     uint16_t root_dir_files = 0;
     FFDIR dir;
     FILINFO finfo;
     
     while (f_mount(&FatFs, "", 1) != FR_OK) {
-        if (millis() - last_status_millis > STATUS_CHECK_PERIOD) {
-            last_status_millis = millis();
+        if (micros60() - last_status_millis > STATUS_CHECK_PERIOD) {
+            last_status_millis = micros60();
             can_msg_t msg;
-            build_general_board_status_msg(PRIO_MEDIUM, millis(), ACT_STATE_ILLEGAL, 0, &msg);
+            build_general_board_status_msg(PRIO_MEDIUM, micros60(), ACT_STATE_ILLEGAL, 0, &msg);
             txb_enqueue(&msg);
             
             TOGGLE_RED_LED();
@@ -108,11 +108,11 @@ int main(void) {
     for (;;) {
         // CLRWDT();
 
-        if ((millis() - last_status_millis) > STATUS_CHECK_PERIOD) {
-            last_status_millis = millis();
+        if ((micros60() - last_status_millis) > STATUS_CHECK_PERIOD) {
+            last_status_millis = micros60();
             
             can_msg_t board_stat_msg;
-            build_general_board_status_msg(PRIO_MEDIUM, millis(), 0, 0, &board_stat_msg);
+            build_general_board_status_msg(PRIO_MEDIUM, micros60(), 0, 0, &board_stat_msg);
             txb_enqueue(&board_stat_msg);
             
             TOGGLE_BLUE_LED();
