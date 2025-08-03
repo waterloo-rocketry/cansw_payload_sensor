@@ -14,9 +14,10 @@ void INIT_PINS() {
     TRISA2 = 0; // Blue LED output enable
     TRISA3 = 0; // Green LED output enable
     TRISA4 = 0; // Red LED output enable
+    
+    TRISA5 = 0;
 }
 
-// need to test
 void SET_BLUE_LED(int state) {
     if (state == 0 || state == 1)
         LATA2 = state;
@@ -34,7 +35,6 @@ void SET_RED_LED(int state) {
 
 // for heartbeats we want to alternate,
 // manually setting true false is annoying
-// test locally in C first probs
 void TOGGLE_BLUE_LED() {
     LATA2 ^= 1;
 }

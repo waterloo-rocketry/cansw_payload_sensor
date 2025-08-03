@@ -59,7 +59,8 @@
 typedef enum { 
     SDFAST_CONFIG,
     SDSLOW_CONFIG,
-    SPI1_DEFAULT
+    SPI1_DEFAULT,
+    SPI1_ADC
 } spi1_modes_t;
 
 void SPI1_Initialize(void);

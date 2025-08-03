@@ -5,11 +5,13 @@
 #include <stdio.h>
 
 #include "platform.h"
+#include "mcp3561.h"
 
 #include "canlib.h"
 #include "timer.h"
 
-#define STATUS_CHECK_PERIOD 1
+#define ADC_READ_PERIOD 1 // 16.7kHz
+#define STATUS_CHECK_PERIOD 25000 // 0.5Hz
 
 // memory pool for the CAN tx buffer
 uint8_t tx_pool[400];
@@ -53,6 +55,8 @@ int main(void) {
     
     INIT_PINS();
     
+    init_adc();
+    
     // Set up CAN module
     can_timing_t can_setup;
     // can_generate_timing_params(_XTAL_FREQ, &can_setup);
@@ -67,15 +71,16 @@ int main(void) {
     // Set up timer 0 for millis
     timer0_init();
 
-    uint32_t last_status_millis = micros60();
+    uint16_t last_status_micros = micros60();
+    uint16_t last_adc_micros = micros60();
     
     uint16_t root_dir_files = 0;
     FFDIR dir;
     FILINFO finfo;
     
     while (f_mount(&FatFs, "", 1) != FR_OK) {
-        if (micros60() - last_status_millis > STATUS_CHECK_PERIOD) {
-            last_status_millis = micros60();
+        if (micros60() - last_status_micros > STATUS_CHECK_PERIOD) {
+            last_status_micros = micros60();
             can_msg_t msg;
             build_general_board_status_msg(PRIO_MEDIUM, micros60(), ACT_STATE_ILLEGAL, 0, &msg);
             txb_enqueue(&msg);
@@ -85,7 +90,6 @@ int main(void) {
 
         txb_heartbeat();
     }
-    SET_RED_LED(false);
 
     // count the number of flies in the root directory of the SD card
     if (f_opendir(&dir, "/") != FR_OK) {
@@ -108,14 +112,25 @@ int main(void) {
     for (;;) {
         // CLRWDT();
 
-        if ((micros60() - last_status_millis) > STATUS_CHECK_PERIOD) {
-            last_status_millis = micros60();
+        if ((micros60() - last_status_micros) > STATUS_CHECK_PERIOD) {
+            last_status_micros = micros60();
             
             can_msg_t board_stat_msg;
-            build_general_board_status_msg(PRIO_MEDIUM, micros60(), 0, 0, &board_stat_msg);
+            uint16_t millis = (uint16_t) micros60()/25000;
+            build_general_board_status_msg(PRIO_MEDIUM, millis, 0, 0, &board_stat_msg);
             txb_enqueue(&board_stat_msg);
             
             TOGGLE_BLUE_LED();
+        }
+        
+        if ((micros60() - last_status_micros) > ADC_READ_PERIOD) {
+            last_adc_micros = micros60();
+            
+            uint32_t data;
+            
+            data = read_adc();
+            
+            TOGGLE_GREEN_LED();
         }
         
         txb_heartbeat();
