@@ -4,14 +4,6 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <logicalFolder name="MCC Generated Files"
-                     displayName="MCC Generated Files"
-                     projectFiles="true">
-        <logicalFolder name="drivers" displayName="drivers" projectFiles="true">
-        </logicalFolder>
-        <logicalFolder name="sd_spi" displayName="sd_spi" projectFiles="true">
-        </logicalFolder>
-      </logicalFolder>
       <logicalFolder name="mcc_generated_files"
                      displayName="mcc_generated_files"
                      projectFiles="true">
@@ -61,18 +53,6 @@
         <itemPath>canlib/util/safe_ring_buffer.c</itemPath>
         <itemPath>canlib/util/timing_util.c</itemPath>
         <itemPath>canlib/pic18f26k83/pic18f26k83_can.c</itemPath>
-      </logicalFolder>
-      <logicalFolder name="MCC Generated Files"
-                     displayName="MCC Generated Files"
-                     projectFiles="true">
-        <logicalFolder name="docs" displayName="docs" projectFiles="true">
-          <itemPath>mcc_generated_files/docs/spi_basic.dox</itemPath>
-          <itemPath>mcc_generated_files/docs/spi.dox</itemPath>
-        </logicalFolder>
-        <logicalFolder name="drivers" displayName="drivers" projectFiles="true">
-        </logicalFolder>
-        <logicalFolder name="sd_spi" displayName="sd_spi" projectFiles="true">
-        </logicalFolder>
       </logicalFolder>
       <logicalFolder name="mcc_generated_files"
                      displayName="mcc_generated_files"
