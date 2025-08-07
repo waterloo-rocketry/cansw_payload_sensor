@@ -4,11 +4,34 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <logicalFolder name="mcc_generated_files"
+                     displayName="mcc_generated_files"
+                     projectFiles="true">
+        <logicalFolder name="drivers" displayName="drivers" projectFiles="true">
+          <itemPath>mcc_generated_files/drivers/spi_master.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="fatfs" displayName="fatfs" projectFiles="true">
+          <itemPath>mcc_generated_files/fatfs/diskio.h</itemPath>
+          <itemPath>mcc_generated_files/fatfs/ff.h</itemPath>
+          <itemPath>mcc_generated_files/fatfs/ffconf.h</itemPath>
+          <itemPath>mcc_generated_files/fatfs/integer.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="sd_spi" displayName="sd_spi" projectFiles="true">
+          <itemPath>mcc_generated_files/sd_spi/sd_spi.h</itemPath>
+        </logicalFolder>
+        <itemPath>mcc_generated_files/device_config.h</itemPath>
+        <itemPath>mcc_generated_files/mcc.h</itemPath>
+        <itemPath>mcc_generated_files/pin_manager.h</itemPath>
+        <itemPath>mcc_generated_files/spi1.h</itemPath>
+      </logicalFolder>
+      <itemPath>platform.h</itemPath>
+      <itemPath>mcp3561.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
                    projectFiles="true">
       <itemPath>Makefile</itemPath>
+      <itemPath>cansw_payload_sensor.mc3</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -31,10 +54,32 @@
         <itemPath>canlib/util/timing_util.c</itemPath>
         <itemPath>canlib/pic18f26k83/pic18f26k83_can.c</itemPath>
       </logicalFolder>
+      <logicalFolder name="mcc_generated_files"
+                     displayName="mcc_generated_files"
+                     projectFiles="true">
+        <logicalFolder name="drivers" displayName="drivers" projectFiles="true">
+          <itemPath>mcc_generated_files/drivers/spi_master.c</itemPath>
+        </logicalFolder>
+        <logicalFolder name="fatfs" displayName="fatfs" projectFiles="true">
+          <itemPath>mcc_generated_files/fatfs/diskio.c</itemPath>
+          <itemPath>mcc_generated_files/fatfs/ff.c</itemPath>
+          <itemPath>mcc_generated_files/fatfs/ffsystem.c</itemPath>
+          <itemPath>mcc_generated_files/fatfs/ffunicode.c</itemPath>
+        </logicalFolder>
+        <logicalFolder name="sd_spi" displayName="sd_spi" projectFiles="true">
+          <itemPath>mcc_generated_files/sd_spi/sd_spi.c</itemPath>
+        </logicalFolder>
+        <itemPath>mcc_generated_files/device_config.c</itemPath>
+        <itemPath>mcc_generated_files/mcc.c</itemPath>
+        <itemPath>mcc_generated_files/pin_manager.c</itemPath>
+        <itemPath>mcc_generated_files/spi1.c</itemPath>
+      </logicalFolder>
       <logicalFolder name="f2" displayName="rocketlib" projectFiles="true">
         <itemPath>rocketlib/pic18f26k83/timer.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
+      <itemPath>platform.c</itemPath>
+      <itemPath>mcp3561.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
@@ -42,6 +87,7 @@
     <Elem>canlib/util</Elem>
     <Elem>canlib/pic18f26k83</Elem>
     <Elem>rocketlib/pic18f26k83</Elem>
+    <Elem>mcc_generated_files</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -51,7 +97,7 @@
         <targetDevice>PIC18F26K83</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>noID</platformTool>
+        <platformTool>snap</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>3.00</languageToolchainVersion>
         <platform>2</platform>
